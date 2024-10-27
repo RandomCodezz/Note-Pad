@@ -1,0 +1,29 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="bg-gray-100">
+    <ActionBar title="Notes" class="bg-purple-600">
+        <ActionItem tap="{{ onAddNote }}" ios.position="right" android.position="actionBar">
+            <Label text="+" class="text-2xl text-white p-2" />
+        </ActionItem>
+    </ActionBar>
+
+    <GridLayout>
+        <ListView items="{{ notes }}" itemTap="{{ onNoteTap }}" class="list-group">
+            <ListView.itemTemplate>
+                <GridLayout columns="*, auto" class="p-4 bg-white m-2 rounded-lg" loaded="{{ onItemLoaded }}">
+                    <StackLayout col="0">
+                        <Label text="{{ title }}" class="text-lg font-bold text-gray-800" />
+                        <Label text="{{ content }}" textWrap="true" class="text-gray-600" />
+                        <Label text="{{ createdAt, 'dd MMM yyyy' }}" class="text-xs text-gray-400 mt-2" />
+                    </StackLayout>
+                    <Label col="1" text="×" class="text-xl text-red-500 p-2" tap="{{ $parents['ListView'].onDeleteNote }}" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+
+        <AbsoluteLayout class="fab-container">
+            <Label text="+" tap="{{ onAddNote }}" 
+                   class="bg-purple-600 text-white text-2xl p-4 rounded-full"
+                   width="60" height="60" 
+                   horizontalAlignment="center" verticalAlignment="center" />
+        </AbsoluteLayout>
+    </GridLayout>
+</Page>
